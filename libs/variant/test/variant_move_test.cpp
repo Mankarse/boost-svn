@@ -36,29 +36,33 @@ private:
 };
 
 
-struct MovableAndCopyable {
-    MovableAndCopyable() {}
-    MovableAndCopyable(MovableAndCopyable const& o) {
+struct CopyableAndMovable {
+    CopyableAndMovable() {}
+    CopyableAndMovable(CopyableAndMovable const& o) {
         
     }
-    MovableAndCopyable& operator=(BOOST_COPY_ASSIGN_REF(MovableAndCopyable) o) {
+    CopyableAndMovable& operator=(BOOST_COPY_ASSIGN_REF(CopyableAndMovable) o) {
         return *this;
     }
-    MovableAndCopyable(BOOST_RV_REF(MovableAndCopyable) o) {
+    CopyableAndMovable(BOOST_RV_REF(CopyableAndMovable) o) {
     
     }
-    MovableAndCopyable& operator=(BOOST_RV_REF(MovableAndCopyable) o) {
+    CopyableAndMovable& operator=(BOOST_RV_REF(CopyableAndMovable) o) {
         return *this;
     }
 
 private:
-    BOOST_COPYABLE_AND_MOVABLE(MovableAndCopyable)
+    BOOST_COPYABLE_AND_MOVABLE(CopyableAndMovable)
 };
 
+void run() {
+    
+}
 
 } //namespace variant_move_test
 
 int test_main(int , char* [])
 {
+    variant_move_test::run();
     return 0;
 }
