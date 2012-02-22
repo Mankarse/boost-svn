@@ -12,6 +12,50 @@
 
 #include "boost/variant.hpp"
 #include "boost/test/minimal.hpp"
+#include "boost/move/move.hpp"
+
+namespace variant_move_test {
+
+struct MovableButNotCopyable {
+    MovableButNotCopyable() : i(0) {}
+    MovableButNotCopyable(int newi) : i(newi) {}
+    MovableButNotCopyable(BOOST_RV_REF(MovableButNotCopyable) o) : i(o.i)
+    {
+        o.i = 0;
+    }
+    MovableButNotCopyable& operator=(BOOST_RV_REF(MovableButNotCopyable) o)
+    {
+        i = o.i;
+        o.i = 0;
+        return *this;
+    }
+
+    int i;
+private:
+    BOOST_MOVABLE_BUT_NOT_COPYABLE(MovableButNotCopyable)
+};
+
+
+struct MovableAndCopyable {
+    MovableAndCopyable(MovableAndCopyable const& o) {
+        
+    }
+    MovableAndCopyable& operator=(BOOST_COPY_ASSIGN_REF(MovableAndCopyable) o) {
+        return *this;
+    }
+    MovableAndCopyable(BOOST_RV_REF(MovableAndCopyable) o) {
+    
+    }
+    MovableAndCopyable& operator=(BOOST_RV_REF(MovableAndCopyable) o) {
+        return *this;
+    }
+
+private:
+    BOOST_MOVABLE_AND_COPYABLE(MovableAndCopyable)
+};
+
+
+} //namespace variant_move_test
 
 int test_main(int , char* [])
 {
