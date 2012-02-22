@@ -37,6 +37,7 @@ private:
 
 
 struct MovableAndCopyable {
+    MovableAndCopyable() {}
     MovableAndCopyable(MovableAndCopyable const& o) {
         
     }
@@ -51,7 +52,7 @@ struct MovableAndCopyable {
     }
 
 private:
-    BOOST_MOVABLE_AND_COPYABLE(MovableAndCopyable)
+    BOOST_COPYABLE_AND_MOVABLE(MovableAndCopyable)
 };
 
 
