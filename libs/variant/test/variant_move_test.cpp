@@ -57,6 +57,29 @@ private:
 
 void run() {
     
+    {
+        boost::variant<int> a;
+    }
+        //Construct from element -
+        //boost::variant<MovableButNotCopyable> b(MovableButNotCopyable());
+        //Move construct -
+        //boost::variant<MovableButNotCopyable>(boost::move(a));
+        
+        //Assign --
+        //Assign from element
+        //b = MovableButNotCopyable();
+        //Move assign
+        //a = boost::move(b);
+        
+        //CopyableAndMovable --
+        
+        
+    {
+        //Many elements
+        //int, MovableButNotCopyable
+        //MovableButNotCopyable, MovableButNotCopyable
+        //CopyableAndMovable, MovableButNotCopyable
+    }
 }
 
 } //namespace variant_move_test
