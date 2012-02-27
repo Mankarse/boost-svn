@@ -1,7 +1,7 @@
 // Boost.Geometry (aka GGL, Generic Geometry Library) 
 // Unit Test
 
-// Copyright (c) 2010-2011 Barend Gehrels, Amsterdam, the Netherlands.
+// Copyright (c) 2010-2012 Barend Gehrels, Amsterdam, the Netherlands.
 // Use, modification and distribution is subject to the Boost Software License,
 // Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
 // http://www.boost.org/LICENSE_1_0.txt)
@@ -293,7 +293,7 @@ static std::string case_100_multi[2] =
 {
     // for intersection
     "MULTIPOLYGON(((0 0,0 1,1 0,0 0)),((2 2,2 1,0 1,0 2,1 2,2 3,2 2)))",
-    "MULTIPOLYGON(((1 1,1 2,2 2,2 1,1 1)),((1 2,0 1,0 3,1 4,1 2))))" 
+    "MULTIPOLYGON(((1 1,1 2,2 2,2 1,1 1)),((1 2,0 1,0 3,1 4,1 2)))" 
 };
 
 static std::string case_101_multi[2] = 

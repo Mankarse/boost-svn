@@ -1,9 +1,9 @@
 // Boost.Geometry (aka GGL, Generic Geometry Library)
 // Unit Test
 
-// Copyright (c) 2007-2011 Barend Gehrels, Amsterdam, the Netherlands.
-// Copyright (c) 2008-2011 Bruno Lalande, Paris, France.
-// Copyright (c) 2009-2011 Mateusz Loskot, London, UK.
+// Copyright (c) 2007-2012 Barend Gehrels, Amsterdam, the Netherlands.
+// Copyright (c) 2008-2012 Bruno Lalande, Paris, France.
+// Copyright (c) 2009-2012 Mateusz Loskot, London, UK.
 
 // Parts of Boost.Geometry are redesigned from Geodan's Geographic Library
 // (geolib/GGL), copyright (c) 1995-2010 Geodan, Amsterdam, the Netherlands.
@@ -55,9 +55,30 @@ void test_all()
     test_wkt<bg::model::multi_linestring<bg::model::linestring<P> > >("multilinestring((1 1,2 2,3 3),(4 4,5 5,6 6))", 6, 4 * sqrt(2.0));
     test_wkt<bg::model::multi_polygon<bg::model::polygon<P> > >("multipolygon(((0 0,0 2,2 2,2 0,0 0),(1 1,1 2,2 2,2 1,1 1)),((0 0,0 4,4 4,4 0,0 0)))", 15, 0, 21, 28);
 
+    // Support for the official alternative syntax for multipoint 
+    // (provided by Aleksey Tulinov):
+    test_relaxed_wkt<bg::model::multi_point<P> >("multipoint(1 2,3 4)", "multipoint((1 2),(3 4))");
+
     test_wrong_wkt<bg::model::multi_polygon<bg::model::polygon<P> > >(
         "MULTIPOLYGON(((0 0,0 2,2 2,2 0,0 0),(1 1,1 2,2 2,2 1,1 1)),(0 0,0 4,4 4,4 0,0 0)))",
         "expected '('");
+
+    test_wrong_wkt<bg::model::multi_linestring<bg::model::linestring<P> > >(
+        "MULTILINESTRING ((10 10, 20 20, 10 40), (40 40, 30 30, 40 20, 30 10)), (0 0, 1 1)", 
+        "too much tokens at ','");
+
+    test_wrong_wkt<bg::model::multi_point<P> >(
+        "MULTIPOINT((8 9), 10 11)",
+        "expected '(' at '10'");
+    test_wrong_wkt<bg::model::multi_point<P> >(
+        "MULTIPOINT(12 13, (14 15))",
+        "bad lexical cast: source type value could not be interpreted as target at '(' in 'multipoint(12 13, (14 15))'");
+    test_wrong_wkt<bg::model::multi_point<P> >(
+        "MULTIPOINT((16 17), (18 19)",
+        "expected ')' in 'multipoint((16 17), (18 19)'");
+    test_wrong_wkt<bg::model::multi_point<P> >(
+        "MULTIPOINT(16 17), (18 19)",
+        "too much tokens at ',' in 'multipoint(16 17), (18 19)'");
 }
 
 /*

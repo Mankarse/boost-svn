@@ -1,7 +1,7 @@
 // Boost.Geometry (aka GGL, Generic Geometry Library)
 // Unit Test
 
-// Copyright (c) 2010 Barend Gehrels, Amsterdam, the Netherlands.
+// Copyright (c) 2010-2012 Barend Gehrels, Amsterdam, the Netherlands.
 
 // Use, modification and distribution is subject to the Boost Software License,
 // Version 1.0. (See accompanying file LICENSE_1_0.txt or copy at
@@ -9,6 +9,8 @@
 
 #include <iostream>
 #include <string>
+
+#define TEST_WITH_SVG
 
 #include <geometry_test_common.hpp>
 
@@ -65,7 +67,6 @@ void test_offset(std::string const& caseid, Geometry const& geometry,
 
     //BOOST_CHECK_EQUAL(holes, expected_hole_count);
     BOOST_CHECK_CLOSE(length, expected_length, percentage);
-
 
 #if defined(TEST_WITH_SVG)
     {

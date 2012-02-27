@@ -47,6 +47,7 @@ public:
   void operator()()
   {
     BOOST_TEST(alive_ == 1);
+    std::cout << n_alive << std::endl;
     BOOST_TEST(n_alive == 1);
     op_run = true;
   }
@@ -66,6 +67,7 @@ int main()
     BOOST_TEST(t0.get_id() == id1);
     BOOST_TEST(t1.get_id() == id0);
     t1.join();
+    return boost::report_errors();
   }
 }
 

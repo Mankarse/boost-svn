@@ -22,6 +22,8 @@
 #include <boost/thread/thread.hpp>
 #include <boost/detail/lightweight_test.hpp>
 
+#if defined BOOST_THREAD_USES_CHRONO
+
 class Pred
 {
   int& i_;
@@ -67,7 +69,7 @@ void f()
   }
   else
   {
-    BOOST_TEST(t1 - t0 - milliseconds(250) < milliseconds(5));
+    BOOST_TEST(t1 - t0 - milliseconds(250) < milliseconds(250+5));
     BOOST_TEST(test2 == 0);
   }
   ++runs;
@@ -103,3 +105,6 @@ int main()
   return boost::report_errors();
 }
 
+#else
+#error "Test not applicable: BOOST_THREAD_USES_CHRONO not defined for this platform as not supported"
+#endif

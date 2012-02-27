@@ -1,8 +1,8 @@
 // Boost.Geometry (aka GGL, Generic Geometry Library)
 
-// Copyright (c) 2007-2011 Barend Gehrels, Amsterdam, the Netherlands.
-// Copyright (c) 2008-2011 Bruno Lalande, Paris, France.
-// Copyright (c) 2009-2011 Mateusz Loskot, London, UK.
+// Copyright (c) 2007-2012 Barend Gehrels, Amsterdam, the Netherlands.
+// Copyright (c) 2008-2012 Bruno Lalande, Paris, France.
+// Copyright (c) 2009-2012 Mateusz Loskot, London, UK.
 
 // Parts of Boost.Geometry are redesigned from Geodan's Geographic Library
 // (geolib/GGL), copyright (c) 1995-2010 Geodan, Amsterdam, the Netherlands.
@@ -30,7 +30,7 @@ namespace detail { namespace conversion
 {
 
 template <typename Single, typename Multi, typename Policy>
-struct single_to_multi
+struct single_to_multi: private Policy
 {
     static inline void apply(Single const& single, Multi& multi)
     {
@@ -42,7 +42,7 @@ struct single_to_multi
 
 
 template <typename Multi1, typename Multi2, typename Policy>
-struct multi_to_multi
+struct multi_to_multi: private Policy
 {
     static inline void apply(Multi1 const& multi1, Multi2& multi2)
     {

@@ -22,6 +22,8 @@
 #include <boost/thread/thread.hpp>
 #include <boost/detail/lightweight_test.hpp>
 
+#if defined BOOST_THREAD_USES_CHRONO
+
 struct Clock
 {
   typedef boost::chrono::milliseconds duration;
@@ -78,7 +80,7 @@ void f()
   }
   else
   {
-    BOOST_TEST(t1 - t0 - Clock::duration(250) < Clock::duration(2));
+    BOOST_TEST(t1 - t0 - Clock::duration(250) < Clock::duration(250+2));
     BOOST_TEST(test2 == 0);
     BOOST_TEST(!r);
   }
@@ -115,3 +117,6 @@ int main()
   return boost::report_errors();
 }
 
+#else
+#error "Test not applicable: BOOST_THREAD_USES_CHRONO not defined for this platform as not supported"
+#endif
